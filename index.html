@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bibliotheca | A Golden Sanctuary of Words</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold-primary: #D4AF37;
+            --gold-light: #F4E4BC;
+            --gold-dark: #B8860B;
+            --gold-metallic: #FFD700;
+            --black: #0a0a0a;
+            --black-light: #1a1a1a;
+            --cream: #F5F0E1;
+            --cream-dark: #E8DCC4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Playfair Display', serif;
+            background: var(--black);
+            color: var(--cream);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.4s ease;
+            background: transparent;
+        }
+
+        .navbar.scrolled {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 60px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--gold-primary);
+            text-decoration: none;
+            letter-spacing: 3px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold-primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold-primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(10, 10, 10, 0.3) 0%,
+                rgba(10, 10, 10, 0.5) 50%,
+                rgba(10, 10, 10, 0.8) 100%
+            );
+            z-index: -1;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            padding: 0 20px;
+        }
+
+        .hero-tagline {
+            font-family: 'Cinzel', serif;
+            font-size: 14px;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            color: var(--gold-primary);
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.5s forwards;
+        }
+
+        .hero-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(40px, 8vw, 90px);
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 50px;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.8s forwards;
+        }
+
+        .hero-title span {
+            display: block;
+            color: var(--gold-light);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            opacity: 0;
+            animation: fadeInUp 1s ease 1.1s forwards;
+        }
+
+        .btn {
+            padding: 18px 45px;
+            font-family: 'Cinzel', serif;
+            font-size: 13px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-primary);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gold-primary);
+            transition: left 0.4s ease;
+            z-index: -1;
+        }
+
+        .btn:hover {
+            color: var(--black);
+        }
+
+        .btn:hover::before {
+            left: 0;
+        }
+
+        .btn-primary {
+            background: var(--gold-primary);
+            color: var(--black);
+        }
+
+        .btn-primary::before {
+            background: var(--black);
+        }
+
+        .btn-primary:hover {
+            color: var(--gold-primary);
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            animation: fadeIn 1s ease 1.5s forwards;
+        }
+
+        .scroll-indicator span {
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold-primary);
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, var(--gold-primary), transparent);
+            animation: scrollPulse 2s ease infinite;
+        }
+
+        /* Philosophy Section */
+        .philosophy {
+            padding: 150px 60px;
+            background: var(--black);
+            position: relative;
+        }
+
+        .philosophy::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold-primary), transparent);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-tag {
+            font-family: 'Cinzel', serif;
+            font-size: 12px;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: var(--gold-primary);
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(32px, 5vw, 52px);
+            font-weight: 400;
+            color: var(--gold-light);
+        }
+
+        .philosophy-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .philosophy-text p {
+            font-size: 17px;
+            line-height: 1.9;
+            color: var(--cream-dark);
+            margin-bottom: 25px;
+        }
+
+        .philosophy-images {
+            position: relative;
+            height: 600px;
+        }
+
+        .philosophy-img {
+            position: absolute;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .philosophy-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .philosophy-img-1 {
+            top: 0;
+            right: 0;
+            width: 70%;
+            height: 65%;
+            z-index: 2;
+        }
+
+        .philosophy-img-2 {
+            bottom: 0;
+            left: 0;
+            width: 55%;
+            height: 50%;
+            z-index: 1;
+        }
+
+        .philosophy-img::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent);
+            pointer-events: none;
+        }
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            max-width: 1200px;
+            margin: 100px auto 0;
+            padding-top: 60px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Cinzel', serif;
+            font-size: 48px;
+            font-weight: 600;
+            color: var(--gold-primary);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--cream-dark);
+        }
+
+        /* Video Section */
+        .video-section {
+            height: 80vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.7);
+            z-index: -1;
+        }
+
+        .video-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 40px;
+        }
+
+        .video-content p {
+            font-size: 18px;
+            line-height: 2;
+            color: var(--cream);
+            margin-bottom: 40px;
+        }
+
+        /* Classics Section */
+        .classics {
+            padding: 150px 60px;
+            background: var(--black-light);
+        }
+
+        .classics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 1400px;
+            margin: 60px auto 0;
+        }
+
+        .classic-card {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .classic-card:hover {
+            border-color: var(--gold-primary);
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(212, 175, 55, 0.1);
+        }
+
+        .classic-card img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .classic-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .classic-info {
+            padding: 30px;
+            background: var(--black);
+        }
+
+        .classic-category {
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold-primary);
+            margin-bottom: 10px;
+        }
+
+        .classic-title {
+            font-family: 'Cinzel', serif;
+            font-size: 22px;
+            color: var(--gold-light);
+            margin-bottom: 15px;
+        }
+
+        .classic-price {
+            font-size: 18px;
+            color: var(--gold-primary);
+        }
+
+        /* Quotes Section */
+        .quotes {
+            padding: 150px 60px;
+            background: var(--black);
+        }
+
+        .quote-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 500px;
+            margin-bottom: 80px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            overflow: hidden;
+        }
+
+        .quote-card:nth-child(even) {
+            direction: rtl;
+        }
+
+        .quote-card:nth-child(even) > * {
+            direction: ltr;
+        }
+
+        .quote-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .quote-card:hover .quote-image img {
+            transform: scale(1.05);
+        }
+
+        .quote-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px;
+            background: var(--black-light);
+        }
+
+        .quote-tag {
+            font-family: 'Cinzel', serif;
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold-primary);
+            margin-bottom: 20px;
+        }
+
+        .quote-book {
+            font-family: 'Cinzel', serif;
+            font-size: 32px;
+            color: var(--gold-light);
+            margin-bottom: 30px;
+        }
+
+        .quote-text {
+            font-size: 22px;
+            font-style: italic;
+            line-height: 1.8;
+            color: var(--cream);
+            margin-bottom: 25px;
+            position: relative;
+            padding-left: 30px;
+            border-left: 2px solid var(--gold-primary);
+        }
+
+        .quote-author {
+            font-size: 14px;
+            letter-spacing: 2px;
+            color: var(--gold-primary);
+        }
+
+        /* Journal Section */
+        .journal {
+            padding: 150px 60px;
+            background: var(--black-light);
+        }
+
+        .journal-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin: 60px auto 0;
+        }
+
+        .journal-card {
+            position: relative;
+            height: 450px;
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .journal-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .journal-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .journal-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 40px;
+            background: linear-gradient(to top, rgba(10, 10, 10, 0.95), transparent);
+        }
+
+        .journal-date {
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: var(--gold-primary);
+            margin-bottom: 10px;
+        }
+
+        .journal-title {
+            font-family: 'Cinzel', serif;
+            font-size: 22px;
+            color: var(--gold-light);
+            margin-bottom: 15px;
+        }
+
+        .journal-excerpt {
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--cream-dark);
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 150px 60px;
+            background: var(--black);
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 60px auto 0;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 30px 0;
+        }
+
+        .faq-question {
+            font-family: 'Cinzel', serif;
+            font-size: 20px;
+            color: var(--gold-light);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            color: var(--gold-primary);
+        }
+
+        .faq-icon {
+            font-size: 24px;
+            color: var(--gold-primary);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+            padding-top: 20px;
+        }
+
+        .faq-answer p {
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--cream-dark);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 100px 60px 40px;
+            background: var(--black-light);
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            max-width: 1400px;
+            margin: 0 auto 60px;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 28px;
+            color: var(--gold-primary);
+            margin-bottom: 20px;
+        }
+
+        .footer-brand p {
+            font-size: 14px;
+            line-height: 1.8;
+            color: var(--cream-dark);
+            margin-bottom: 30px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--gold-primary);
+            color: var(--black);
+            border-color: var(--gold-primary);
+        }
+
+        .footer-column h4 {
+            font-family: 'Cinzel', serif;
+            font-size: 14px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold-primary);
+            margin-bottom: 25px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column a {
+            font-size: 14px;
+            color: var(--cream-dark);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: var(--gold-primary);
+        }
+
+        .newsletter {
+            margin-top: 20px;
+        }
+
+        .newsletter p {
+            font-size: 14px;
+            color: var(--cream-dark);
+            margin-bottom: 15px;
+        }
+
+        .newsletter-form {
+            display: flex;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 15px 20px;
+            background: var(--black);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: var(--cream);
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .newsletter-form input::placeholder {
+            color: var(--cream-dark);
+        }
+
+        .newsletter-form button {
+            padding: 15px 30px;
+            background: var(--gold-primary);
+            border: none;
+            color: var(--black);
+            font-family: 'Cinzel', serif;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            background: var(--gold-light);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .footer-bottom p {
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: var(--cream-dark);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 1; transform: scaleY(1); }
+            50% { opacity: 0.5; transform: scaleY(0.8); }
+        }
+
+        /* Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .philosophy-content {
+                grid-template-columns: 1fr;
+            }
+
+            .classics-grid,
+            .journal-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .quote-card {
+                grid-template-columns: 1fr;
+            }
+
+            .quote-card:nth-child(even) {
+                direction: ltr;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 30px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .classics-grid,
+            .journal-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .philosophy,
+            .classics,
+            .quotes,
+            .journal,
+            .faq,
+            .footer {
+                padding: 80px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <a href="#" class="logo">Bibliotheca</a>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#philosophy">Philosophy</a></li>
+            <li><a href="#classics">Classics</a></li>
+            <li><a href="#quotes">Quotes</a></li>
+            <li><a href="#journal">Journal</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <img src="images/hero-library.jpg" alt="Grand Library" class="hero-image">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <p class="hero-tagline">A Sanctuary of Words</p>
+            <h1 class="hero-title">
+                Where Stories
+                <span>Become Timeless</span>
+            </h1>
+            <div class="hero-buttons">
+                <a href="#classics" class="btn btn-primary">Explore Classics</a>
+                <a href="#quotes" class="btn">Discover Quotes</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section class="philosophy" id="philosophy">
+        <div class="section-header reveal">
+            <p class="section-tag">Our Philosophy</p>
+            <h2 class="section-title">The Power of the Written Word</h2>
+        </div>
+        <div class="philosophy-content">
+            <div class="philosophy-text reveal">
+                <p>In an age of fleeting digital moments, we believe in the enduring magic of books. Each page turned is a journey taken, each word absorbed a seed planted in the garden of the mind. Literature transcends time, connecting us across centuries to the thoughts, dreams, and wisdom of those who came before.</p>
+                <p>Our collection celebrates the masterpieces that have shaped human consciousness—the novels that made us weep, the poetry that made us soar, and the philosophy that made us question. These are not merely books; they are portals to other worlds, mirrors of our own souls, and beacons of understanding in an often confusing world.</p>
+            </div>
+            <div class="philosophy-images reveal">
+                <div class="philosophy-img philosophy-img-1">
+                    <img src="images/books-detail.jpg" alt="Classic Books">
+                </div>
+                <div class="philosophy-img philosophy-img-2">
+                    <img src="images/reading-moment.jpg" alt="Reading Moment">
+                </div>
+            </div>
+        </div>
+        <div class="stats reveal">
+            <div class="stat-item">
+                <div class="stat-number" data-target="500">0</div>
+                <div class="stat-label">Classic Titles</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-target="2000">0</div>
+                <div class="stat-label">Curated Quotes</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-target="300">0</div>
+                <div class="stat-label">Legendary Authors</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-target="100">0</div>
+                <div class="stat-label">Timeless Wisdom</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video-section">
+        <img src="images/hands-reading.jpg" alt="Reading" class="video-bg">
+        <div class="video-overlay"></div>
+        <div class="video-content reveal">
+            <p class="section-tag">The Reading Life</p>
+            <h2 class="section-title" style="margin-bottom: 40px;">Words That Transform</h2>
+            <p>To read is to embark on an infinite journey of discovery. Within the pages of a book, we find not only stories but the very essence of what it means to be human. The greatest authors have poured their souls onto paper, leaving behind legacies that continue to inspire, challenge, and comfort generations of readers.</p>
+            <a href="#classics" class="btn">Explore the Collection</a>
+        </div>
+    </section>
+
+    <!-- Classics Section -->
+    <section class="classics" id="classics">
+        <div class="section-header reveal">
+            <p class="section-tag">Timeless Classics</p>
+            <h2 class="section-title">Literary Masterpieces</h2>
+        </div>
+        <div class="classics-grid">
+            <div class="classic-card reveal">
+                <img src="images/solitary-book.jpg" alt="Pride and Prejudice">
+                <div class="classic-info">
+                    <p class="classic-category">Romance</p>
+                    <h3 class="classic-title">Pride and Prejudice</h3>
+                    <p class="classic-price">$18.00</p>
+                </div>
+            </div>
+            <div class="classic-card reveal">
+                <img src="images/books-rose.jpg" alt="The Great Gatsby">
+                <div class="classic-info">
+                    <p class="classic-category">20th Century</p>
+                    <h3 class="classic-title">The Great Gatsby</h3>
+                    <p class="classic-price">$16.00</p>
+                </div>
+            </div>
+            <div class="classic-card reveal">
+                <img src="images/books-detail.jpg" alt="Jane Eyre">
+                <div class="classic-info">
+                    <p class="classic-category">Gothic</p>
+                    <h3 class="classic-title">Jane Eyre</h3>
+                    <p class="classic-price">$19.00</p>
+                </div>
+            </div>
+            <div class="classic-card reveal">
+                <img src="images/reading-moment.jpg" alt="Moby-Dick">
+                <div class="classic-info">
+                    <p class="classic-category">19th Century</p>
+                    <h3 class="classic-title">Moby-Dick</h3>
+                    <p class="classic-price">$22.00</p>
+                </div>
+            </div>
+            <div class="classic-card reveal">
+                <img src="images/writing-desk.jpg" alt="Crime and Punishment">
+                <div class="classic-info">
+                    <p class="classic-category">Philosophy</p>
+                    <h3 class="classic-title">Crime and Punishment</h3>
+                    <p class="classic-price">$20.00</p>
+                </div>
+            </div>
+            <div class="classic-card reveal">
+                <img src="images/books-collection.jpg" alt="Wuthering Heights">
+                <div class="classic-info">
+                    <p class="classic-category">Gothic</p>
+                    <h3 class="classic-title">Wuthering Heights</h3>
+                    <p class="classic-price">$17.00</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quotes Section -->
+    <section class="quotes" id="quotes">
+        <div class="section-header reveal">
+            <p class="section-tag">Words of Wisdom</p>
+            <h2 class="section-title">Literary Quotes</h2>
+        </div>
+        
+        <div class="quote-card reveal">
+            <div class="quote-image">
+                <img src="images/books-collection.jpg" alt="The Alchemist">
+            </div>
+            <div class="quote-content">
+                <p class="quote-tag">Words of Wisdom</p>
+                <h3 class="quote-book">The Alchemist</h3>
+                <p class="quote-text">"The secret of life, though, is to fall seven times and to get up eight times."</p>
+                <p class="quote-author">— Paulo Coelho</p>
+            </div>
+        </div>
+
+        <div class="quote-card reveal">
+            <div class="quote-image">
+                <img src="images/reading-moment.jpg" alt="Pride and Prejudice">
+            </div>
+            <div class="quote-content">
+                <p class="quote-tag">Timeless Insight</p>
+                <h3 class="quote-book">Pride and Prejudice</h3>
+                <p class="quote-text">"The person, be it gentleman or lady, who has not pleasure in a good novel, must be intolerably stupid."</p>
+                <p class="quote-author">— Jane Austen</p>
+            </div>
+        </div>
+
+        <div class="quote-card reveal">
+            <div class="quote-image">
+                <img src="images/books-rose.jpg" alt="Little Women">
+            </div>
+            <div class="quote-content">
+                <p class="quote-tag">Literary Wisdom</p>
+                <h3 class="quote-book">Little Women</h3>
+                <p class="quote-text">"I am not afraid of storms, for I am learning how to sail my ship."</p>
+                <p class="quote-author">— Louisa May Alcott</p>
+            </div>
+        </div>
+
+        <div class="quote-card reveal">
+            <div class="quote-image">
+                <img src="images/reading-nook.jpg" alt="Harry Potter">
+            </div>
+            <div class="quote-content">
+                <p class="quote-tag">Profound Truth</p>
+                <h3 class="quote-book">Harry Potter</h3>
+                <p class="quote-text">"Happiness can be found even in the darkest of times, if one only remembers to turn on the light."</p>
+                <p class="quote-author">— J.K. Rowling</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Journal Section -->
+    <section class="journal" id="journal">
+        <div class="section-header reveal">
+            <p class="section-tag">The Reader's Journal</p>
+            <h2 class="section-title">Journeys Through Literature</h2>
+        </div>
+        <div class="journal-grid">
+            <div class="journal-card reveal">
+                <img src="images/reading-nook.jpg" alt="Slow Reading">
+                <div class="journal-overlay">
+                    <p class="journal-date">March 28, 2026</p>
+                    <h3 class="journal-title">The Art of Slow Reading</h3>
+                    <p class="journal-excerpt">In our age of instant gratification, the deliberate pace of reading a classic novel offers a rare and precious gift.</p>
+                </div>
+            </div>
+            <div class="journal-card reveal">
+                <img src="images/bookstore.jpg" alt="Classics Today">
+                <div class="journal-overlay">
+                    <p class="journal-date">March 15, 2026</p>
+                    <h3 class="journal-title">Why Classics Still Matter</h3>
+                    <p class="journal-excerpt">The themes explored by Dickens, Austen, and Tolstoy remain as relevant in our modern world as they were centuries ago.</p>
+                </div>
+            </div>
+            <div class="journal-card reveal">
+                <img src="images/library-tall.jpg" alt="Finding Solace">
+                <div class="journal-overlay">
+                    <p class="journal-date">February 28, 2026</p>
+                    <h3 class="journal-title">Finding Solace in Books</h3>
+                    <p class="journal-excerpt">There is a unique comfort in returning to beloved stories. Like old friends, they welcome us back with familiar words.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="section-header reveal">
+            <p class="section-tag">Common Questions</p>
+            <h2 class="section-title">Frequently Asked</h2>
+        </div>
+        <div class="faq-container">
+            <div class="faq-item reveal">
+                <div class="faq-question">
+                    What makes a book a 'classic'?
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>A classic is a work that possesses enduring quality, literary excellence, and universal themes that resonate across generations. These books have stood the test of time, continuing to influence readers and writers long after their initial publication.</p>
+                </div>
+            </div>
+            <div class="faq-item reveal">
+                <div class="faq-question">
+                    Which classic should I read first?
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>For newcomers to classic literature, we often recommend starting with 'Pride and Prejudice' by Jane Austen for its wit and accessibility, 'The Great Gatsby' by F. Scott Fitzgerald for its beautiful prose, or 'Animal Farm' by George Orwell for its concise yet powerful storytelling.</p>
+                </div>
+            </div>
+            <div class="faq-item reveal">
+                <div class="faq-question">
+                    Why should I read classic literature?
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Classic literature offers profound insights into human nature, society, and the world around us. These works have shaped our cultural consciousness and continue to influence modern storytelling. Reading classics expands your vocabulary and enhances critical thinking.</p>
+                </div>
+            </div>
+            <div class="faq-item reveal">
+                <div class="faq-question">
+                    Are classics still relevant in the modern age?
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Absolutely. The themes explored in classic literature—love, loss, ambition, morality, identity, and the search for meaning—are universal and timeless. While the settings and language may differ, the fundamental human experiences these books portray remain as relevant today as ever.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>Bibliotheca</h3>
+                <p>A curated sanctuary of timeless literature and profound wisdom. Discover the books and quotes that have shaped human thought across centuries.</p>
+                <div class="social-links">
+                    <a href="#">IG</a>
+                    <a href="#">TW</a>
+                    <a href="#">FB</a>
+                </div>
+                <div class="newsletter">
+                    <p>Join Our Literary Circle</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Enter your email">
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="#classics">Timeless Classics</a></li>
+                    <li><a href="#quotes">Literary Quotes</a></li>
+                    <li><a href="#journal">Reading Journal</a></li>
+                    <li><a href="#philosophy">Philosophy</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Collections</h4>
+                <ul>
+                    <li><a href="#">19th Century</a></li>
+                    <li><a href="#">20th Century</a></li>
+                    <li><a href="#">Philosophy</a></li>
+                    <li><a href="#">Romance</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Reading Guides</a></li>
+                    <li><a href="#">Author Biographies</a></li>
+                    <li><a href="#">Literary Terms</a></li>
+                    <li><a href="#">Book Clubs</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 BIBLIOTHECA. CELEBRATING LITERATURE ACROSS CENTURIES.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Reveal animation on scroll
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealOnScroll = () => {
+            revealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // Counter animation
+        const counters = document.querySelectorAll('.stat-number');
+        let countersStarted = false;
+
+        const startCounters = () => {
+            const statsSection = document.querySelector('.stats');
+            const sectionTop = statsSection.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+
+            if (sectionTop < windowHeight - 100 && !countersStarted) {
+                countersStarted = true;
+                counters.forEach(counter => {
+                    const target = parseInt(counter.getAttribute('data-target'));
+                    const duration = 2000;
+                    const increment = target / (duration / 16);
+                    let current = 0;
+
+                    const updateCounter = () => {
+                        current += increment;
+                        if (current < target) {
+                            counter.textContent = Math.floor(current) + '+';
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            counter.textContent = target + '+';
+                        }
+                    };
+
+                    updateCounter();
+                });
+            }
+        };
+
+        window.addEventListener('scroll', startCounters);
+
+        // FAQ accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                
+                // Close all items
+                faqItems.forEach(i => i.classList.remove('active'));
+                
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

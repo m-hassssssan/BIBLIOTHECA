@@ -2,6 +2,15 @@
 
 A premium artisan handcrafted home goods e-commerce template with elegant animations, parallax effects, and a full shopping cart system. Features 11 configurable sections driven entirely by a single `config.ts` file.
 
+## Language
+
+If the user has not specified a language of the website, then the language of the website (the content you insert into the template) must match the language of the user's query.
+If the user has specified a language of the website, then the language of the website must match the user's requirement.
+
+## Content
+
+The actual content of the website should match the user's query.
+
 ## Features
 
 - Full-screen parallax hero with fade-in animations and dual CTA buttons
@@ -16,7 +25,7 @@ A premium artisan handcrafted home goods e-commerce template with elegant animat
 - Footer with link groups, social icons, and newsletter subscription
 - Slide-out shopping cart sidebar with quantity controls
 - Full-screen navigation menu with search, links, social icons, and background image
-- Each section has a null check and renders nothing when config is empty
+- Each section has null check - renders nothing when config is empty
 
 ## Tech Stack
 
